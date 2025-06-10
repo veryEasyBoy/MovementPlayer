@@ -7,17 +7,19 @@ public class Player : PlayerParametrs
     private void Start()
     {
         fsm = new Fsm();
+        
         mouseSens = new MouseSens(mousStats.sensetivity,mousStats.playerEulerAngles,playerPosition,mousStats.verticalMaxRangeRotate,transformAimTarget);
         mouseSens.Start();
-        fsm.AddState(new PlayerIdle(fsm,playerPosition, characterStats.Speed, rb,capsuleCollider));
-        fsm.AddState(new PlayerMovementRun(fsm,playerPosition, characterStats.Speed, rb, capsuleCollider));
+        fsm.AddState(new PkPlayerSlide(fsm, playerPosition, characterStats.Speed, rb, capsuleCollider,slideStats.DurationRide,slideStats.AccelerationRide,slideStats.StartDurationRide));
+        fsm.AddState(new PkPlayerIdle(fsm,playerPosition, characterStats.Speed, rb,capsuleCollider));
+        fsm.AddState(new PkPlayerRun(fsm,playerPosition, characterStats.Speed, rb, capsuleCollider, characterStats.slide));
 
-        fsm.SetState<PlayerIdle>();
+        fsm.SetState<PkPlayerIdle>();
     }
     private void Update()
     {
         fsm.Update();
-        mouseSens.RotateMouse();
+        mouseSens.RotateCharacter();
     }
     private void FixedUpdate()
     {

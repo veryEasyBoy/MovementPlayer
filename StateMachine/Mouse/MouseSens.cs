@@ -21,7 +21,7 @@ public class MouseSens
     {
         playerEulerAngles = playerPosition.eulerAngles;
     }
-    public void RotateMouse()
+    public void RotateCharacter()
     {
         float mousX = Input.GetAxis("Mouse X");
         float mousY = Input.GetAxis("Mouse Y");

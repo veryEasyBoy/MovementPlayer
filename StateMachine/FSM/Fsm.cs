@@ -25,7 +25,10 @@ public class Fsm
             stateCurrent = newState;
             stateCurrent.Enter();
         }
-       // Debug.Log("Gooo");
+    }
+    public void Start()
+    {
+        stateCurrent?.Start();
     }
     public void Update()
     {

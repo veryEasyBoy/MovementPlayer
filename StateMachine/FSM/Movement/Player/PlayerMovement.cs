@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : FsmState
+public abstract class PlayerMovement : FsmState
 {
-    private string AxisHorizontal = "Horizontal";
-    private string AxisVertical = "Vertical";
     protected Transform transformCharacter;
     protected CapsuleCollider colliderCharacter;
     protected Rigidbody rb;
@@ -18,44 +16,18 @@ public class PlayerMovement : FsmState
         this.colliderCharacter = colliderCharacter;
         this.speed = speed;
     }
-    public override void Enter()
-    {
-       // Debug.Log(message: $" Movement {this.GetType()} state[ENTER]");
-    }
-    public override void Exit()
-    {
-        //Debug.Log(message: $"Movement {this.GetType()} state[EXIT]");
-    }
-    public override void Update()
-    {
-       // Debug.Log(message: $"Movement {this.GetType()} state[UPDATE]");
-        InputDirectional = ReadInput();
-    }
-    public override void FixedUpdate()
-    {
-        //Debug.Log(message: $"Movement {this.GetType()} state[FIXEDUPDATE]");
-        //StopMove(InputDirectional);
-        //CanMove(InputDirectional);
-    }
     public virtual void CanMove(Vector2 inputDirection)
     {
-       // Vector3 movement = new Vector3(inputDirection.x, 0f, inputDirection.y);
-        Vector3 movement = transformCharacter.forward * inputDirection.y +transformCharacter.right * inputDirection.x;
-        rb.velocity = movement.normalized*speed;
-        Fsm.SetState<PlayerMovementRun>();
+        Debug.Log(message: $"Movement {this.GetType()} state[UPDATE]");
+        Vector3 movement = transformCharacter.forward * inputDirection.y + transformCharacter.right * inputDirection.x;
+        rb.velocity = movement.normalized * speed;
     }
-    public virtual void StopMove(Vector2 inputDirection)
+    public virtual void StopMove(Vector2 inputDirection) { }
+    /*protected void ChangesState<T>(T state) where T : PlayerMovementRun
     {
-        if (inputDirection.sqrMagnitude == 0f)
-        {
-            Fsm.SetState<PlayerIdle>();
-        }
+        //Fsm.SetState<state>();
     }
-    protected Vector2 ReadInput()
-    {
-        var inputHorizontal = Input.GetAxis(AxisHorizontal);
-        var inputVertical = Input.GetAxis(AxisVertical);
-        var inputDirection = new Vector2( inputHorizontal, inputVertical);
-        return inputDirection;
-    }
+    */
+    protected abstract Vector2 ReadInput();
+
 }
