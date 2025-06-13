@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MousStats", menuName = "MousStats", order = 51)]
 public class MousStats : ScriptableObject
 {
-    public float sensetivity;
+    public float sensitivity;
     public Vector3 playerEulerAngles;
     public float verticalMaxRangeRotate;
 }

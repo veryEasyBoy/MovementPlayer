@@ -8,7 +8,7 @@ public class Player : PlayerParametrs
     {
         fsm = new Fsm();
         
-        mouseSens = new MouseSens(mousStats.sensetivity,mousStats.playerEulerAngles,playerPosition,mousStats.verticalMaxRangeRotate,transformAimTarget);
+        mouseSens = new MouseSens(mousStats.sensitivity,mousStats.playerEulerAngles,playerPosition,mousStats.verticalMaxRangeRotate,transformAimTarget);
         mouseSens.Start();
         fsm.AddState(new PkPlayerSlide(fsm, playerPosition, characterStats.Speed, rb, capsuleCollider,slideStats.DurationRide,slideStats.AccelerationRide,slideStats.StartDurationRide));
         fsm.AddState(new PkPlayerIdle(fsm,playerPosition, characterStats.Speed, rb,capsuleCollider));

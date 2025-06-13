@@ -9,18 +9,19 @@ public class AndroidPlayerSlide : AndroidPlayerMovement
     private float durationRide;
     private float startDurationRide;
     private float accelerationRide;
-    public AndroidPlayerSlide(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter,Joystick joystick, float durationRide,float accelerationRide,float startDurationRide) : base(fsm, transform, speed, rb, colliderCharacter, joystick)
+    public AndroidPlayerSlide(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter,Joystick joystick, float durationRide,float accelerationRide,float startDurationRide, Animator animator, AudioSource audioSourc,AudioClip[] audioClip) : base(fsm, transform, speed, rb, colliderCharacter, joystick,animator,audioSourc,audioClip)
     {
         this.startDurationRide = startDurationRide;
         this.durationRide = durationRide;
         this.accelerationRide = accelerationRide;
     }
-    public override void Update()
+    public override void FixedUpdate()
     {
         InputDirectional = ReadInput();
         if (canSlide)
         {
             durationRide = startDurationRide;
+            StartSound();
             UniTask slide = StartSlideUniTask(InputDirectional, durationRide, accelerationRide, colliderCharacter, transformCharacter);
         }
     }
@@ -49,4 +50,18 @@ public class AndroidPlayerSlide : AndroidPlayerMovement
         transformCharacter.position = new Vector3(transformCharacter.position.x, 6.16f, transformCharacter.position.z);
         canSlide = true;
     }
+    private void Sound()
+    {
+        audioSource.pitch = Random.Range(1f, 2f);
+        audioSource.PlayOneShot(audioClip[1], 1f);
+    }
+    private async UniTask StartSoundUniTask()
+    {
+        if (canSlide)
+        {
+            Sound();
+            await UniTask.Delay(0);
+        }
+    }
+    private UniTask StartSound() => StartSoundUniTask();
 }

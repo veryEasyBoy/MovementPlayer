@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4495d283cd213b741b584eca36e61046, type: 3}
   m_Name: MousStats
   m_EditorClassIdentifier: 
-  sensetivity: 200
+  sensitivity: 10
   playerEulerAngles: {x: 0, y: 0, z: 0}
   verticalMaxRangeRotate: 60

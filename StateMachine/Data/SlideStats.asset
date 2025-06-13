@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SlideStats
   m_EditorClassIdentifier: 
   DurationRide: 0.8
-  AccelerationRide: 4
+  AccelerationRide: 3.2

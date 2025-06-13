@@ -53,4 +53,8 @@ public class PanelSens
 
         }
     }
+    public void Update()
+    {
+        sensetivity = GameSetting.sensitivity;
+    }
 }
