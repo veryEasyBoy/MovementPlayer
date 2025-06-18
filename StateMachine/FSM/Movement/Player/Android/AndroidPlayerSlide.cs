@@ -18,6 +18,7 @@ public class AndroidPlayerSlide : AndroidPlayerMovement
     public override void FixedUpdate()
     {
         InputDirectional = ReadInput();
+        CanMove(InputDirectional);
         if (canSlide)
         {
             durationRide = startDurationRide;
@@ -33,9 +34,10 @@ public class AndroidPlayerSlide : AndroidPlayerMovement
             colliderCharacter.center = new Vector3(0, 1f, 0);
             colliderCharacter.height = 0.1f;
             Vector3 movement = transformCharacter.forward * inputDirection.y + transformCharacter.right * inputDirection.x;
-            rb.AddForce(movement.normalized * accelerationRide * durationRide, ForceMode.Impulse);
+            rb.AddForce(movement.normalized * accelerationRide * durationRide);
             durationRide -= 0.01f;
-            await UniTask.Delay(1);
+            await UniTask.Yield(PlayerLoopTiming.FixedUpdate);
+            //await UniTask.Delay(2);
         }
         if (InputDirectional.sqrMagnitude == 0f)
         {

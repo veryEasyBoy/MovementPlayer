@@ -7,15 +7,23 @@ using UnityEngine.EventSystems;
 
 public class AndroidPlayerRun : AndroidPlayerMovement
 {
-    private ButtonPanel buttonControllerPanel;
+    private ButtonUi buttonUi;
+    private ButtonPanel[] buttonPanel;
     private bool canSound = true;
-    public AndroidPlayerRun(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter, Joystick joystic,ButtonPanel buttonControllerPanel, Animator animator, AudioSource audioSourc, AudioClip[] audioClip) : base(fsm, transform, speed, rb, colliderCharacter, joystic,animator,audioSourc,audioClip)
+
+    private enum Button
     {
-        this.buttonControllerPanel = buttonControllerPanel;
+        Slide,
+        BoostSpeed
+    }
+    public AndroidPlayerRun(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter, Joystick joystic,ButtonUi buttonUi,ButtonPanel[] buttonPanel, Animator animator, AudioSource audioSourc, AudioClip[] audioClip) : base(fsm, transform, speed, rb, colliderCharacter, joystic,animator,audioSourc,audioClip)
+    {
+        this.buttonUi = buttonUi;
+        this.buttonPanel = buttonPanel;
     }
     public override void Update()
     {
-        ButtonSlide();
+        buttonUi.Button(buttonPanel, (int)Button.Slide, CanSlide);
         InputDirectional = ReadInput();
         if (InputDirectional.sqrMagnitude == 0f)
         {
@@ -32,23 +40,9 @@ public class AndroidPlayerRun : AndroidPlayerMovement
     {
         Fsm.SetState<AndroidPlayerSlide>();
     }
-    public void ButtonSlide()
+    public void ButtonBustSpeed(float speed)
     {
-        if (buttonControllerPanel.Pressed)
-        {
-            foreach (Touch touch in Input.touches)
-            {
-                if (touch.fingerId == buttonControllerPanel.fingerId)
-                {
-                    if (touch.phase == TouchPhase.Moved)
-                    {
-                        CanSlide();
-                    }
-                }
-                
-            }
-
-        }
+        
     }
     private void StartAnimation()
     {
