@@ -9,7 +9,6 @@ internal class StartGame : MonoBehaviour
     public static bool IsMobile;
     public static bool IsPK;
     [SerializeField] private GameObject[] deactiveObject;
-    [SerializeField] private Transform rotationCamera;
     private void Awake()
     {
         CheckingPlatform();
