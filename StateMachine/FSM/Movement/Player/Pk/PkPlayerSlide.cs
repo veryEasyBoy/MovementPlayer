@@ -9,7 +9,7 @@ public class PkPlayerSlide : PkPlayerMovement
     private float startDurationRide;
     private float accelerationRide;
     private bool canSlide = true;
-    public PkPlayerSlide(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter,float durationRide,float accelerationRide, float startDurationRide) : base(fsm, transform, speed, rb, colliderCharacter)
+    public PkPlayerSlide(Fsm fsm, Character Character, float durationRide,float accelerationRide, float startDurationRide) : base(fsm, Character)
     {
         this.startDurationRide = startDurationRide;
         this.durationRide = durationRide;

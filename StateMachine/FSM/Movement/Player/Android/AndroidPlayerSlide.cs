@@ -9,11 +9,13 @@ public class AndroidPlayerSlide : AndroidPlayerMovement
     private float durationRide;
     private float startDurationRide;
     private float accelerationRide;
-    public AndroidPlayerSlide(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter,Joystick joystick, float durationRide,float accelerationRide,float startDurationRide, Animator animator, AudioSource audioSourc,AudioClip[] audioClip) : base(fsm, transform, speed, rb, colliderCharacter, joystick,animator,audioSourc,audioClip)
+    private float height;
+    public AndroidPlayerSlide(Fsm fsm, Character Character, Joystick joystick, PlayerSlideStats slideStats, float height, Animator animator, AudioSource audioSourc,AudioClip[] audioClip) : base(fsm, Character,joystick,animator, audioSourc, audioClip)
     {
-        this.startDurationRide = startDurationRide;
-        this.durationRide = durationRide;
-        this.accelerationRide = accelerationRide;
+        this.height = height;
+        startDurationRide = slideStats.StartDurationRide;
+        durationRide = slideStats.DurationRide;
+        accelerationRide = slideStats.AccelerationRide;
     }
     public override void FixedUpdate()
     {
@@ -49,7 +51,7 @@ public class AndroidPlayerSlide : AndroidPlayerMovement
         }
         colliderCharacter.center = new Vector3(0, 0.8f, 0);
         colliderCharacter.height = 1.6f;
-        transformCharacter.position = new Vector3(transformCharacter.position.x, 6.16f, transformCharacter.position.z);
+        transformCharacter.position = new Vector3(transformCharacter.position.x, height, transformCharacter.position.z);
         canSlide = true;
     }
     private void Sound()

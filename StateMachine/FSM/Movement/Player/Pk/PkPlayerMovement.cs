@@ -6,7 +6,7 @@ public class PkPlayerMovement : PlayerMovement
 {
     private string AxisHorizontal = "Horizontal";
     private string AxisVertical = "Vertical";
-    public PkPlayerMovement(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider playerCollider) : base(fsm, transform, speed, rb, playerCollider) { }
+    public PkPlayerMovement(Fsm fsm, Character Character) : base(fsm, Character) { }
     protected override Vector2 ReadInput()
     {
         var inputHorizontal = Input.GetAxis(AxisHorizontal);

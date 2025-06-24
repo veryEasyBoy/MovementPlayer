@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public abstract class PlayerMovement : FsmState
 {
@@ -9,12 +11,12 @@ public abstract class PlayerMovement : FsmState
     protected Rigidbody rb;
     protected Vector2 InputDirectional;
     protected float speed;
-    public PlayerMovement(Fsm fsm, Transform transform, float speed, Rigidbody rb,CapsuleCollider colliderCharacter) : base(fsm)
+    public PlayerMovement(Fsm fsm, Character Character) : base(fsm)
     {
-        transformCharacter = transform; 
-        this.rb = rb;
-        this.colliderCharacter = colliderCharacter;
-        this.speed = speed;
+        transformCharacter = Character.transform; 
+        rb = Character.rb;
+        colliderCharacter = Character.colliderCharacter;
+        speed = Character.speed;
     }
     public virtual void CanMove(Vector2 inputDirection)
     {
@@ -23,11 +25,6 @@ public abstract class PlayerMovement : FsmState
         rb.velocity = movement.normalized * speed;
     }
     public virtual void StopMove(Vector2 inputDirection) { }
-    /*protected void ChangesState<T>(T state) where T : PlayerMovementRun
-    {
-        //Fsm.SetState<state>();
-    }
-    */
     protected abstract Vector2 ReadInput();
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PkPlayerRun : PkPlayerMovement
 {
     KeyCode slideKeyCode;
-    public PkPlayerRun(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider playerCollider, KeyCode slideKeyCode) : base(fsm, transform, speed, rb, playerCollider)
+    public PkPlayerRun(Fsm fsm, Character Character, KeyCode slideKeyCode) : base(fsm, Character)
     {
         this.slideKeyCode = slideKeyCode;
     }

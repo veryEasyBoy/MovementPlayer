@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PkPlayerIdle : PkPlayerMovement
 {
-    public PkPlayerIdle(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter) : base(fsm, transform, speed, rb, colliderCharacter) { }
+    public PkPlayerIdle(Fsm fsm, Character Character) : base(fsm, Character) { }
     public override void Update()
     {
         InputDirectional = ReadInput();

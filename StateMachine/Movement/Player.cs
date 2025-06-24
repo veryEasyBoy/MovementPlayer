@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Player : PlayerParametrs
@@ -10,9 +11,9 @@ public class Player : PlayerParametrs
         
         mouseSens = new MouseSens(mousStats.sensitivity,mousStats.playerEulerAngles,playerPosition,mousStats.verticalMaxRangeRotate,transformAimTarget);
         mouseSens.Start();
-        fsm.AddState(new PkPlayerSlide(fsm, playerPosition, characterStats.Speed, rb, capsuleCollider,slideStats.DurationRide,slideStats.AccelerationRide,slideStats.StartDurationRide));
-        fsm.AddState(new PkPlayerIdle(fsm,playerPosition, characterStats.Speed, rb,capsuleCollider));
-        fsm.AddState(new PkPlayerRun(fsm,playerPosition, characterStats.Speed, rb, capsuleCollider, characterStats.slide));
+        fsm.AddState(new PkPlayerSlide(fsm, character,slideStats.DurationRide,slideStats.AccelerationRide,slideStats.StartDurationRide));
+        fsm.AddState(new PkPlayerIdle(fsm,character));
+        fsm.AddState(new PkPlayerRun(fsm,character, characterStats.slide));
 
         fsm.SetState<PkPlayerIdle>();
     }

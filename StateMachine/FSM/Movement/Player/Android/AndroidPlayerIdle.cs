@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AndroidPlayerIdle : AndroidPlayerMovement
 {
-    public AndroidPlayerIdle(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter, Joystick joystic, Animator animator, AudioSource audioSource, AudioClip[] audioClip) : base(fsm, transform, speed, rb, colliderCharacter,joystic,animator,audioSource,audioClip) { }
+    public AndroidPlayerIdle(Fsm fsm, Character Character, Joystick joystic, Animator animator, AudioSource audioSource, AudioClip[] audioClip) : base(fsm, Character,joystic,animator,audioSource,audioClip) { }
     public override void Update()
     {
         InputDirectional = ReadInput();

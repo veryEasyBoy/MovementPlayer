@@ -8,12 +8,12 @@ public class AndroidPlayerMovement : PlayerMovement
     protected Animator animator;
     protected AudioSource audioSource;
     protected AudioClip[] audioClip;
-    public AndroidPlayerMovement(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter, Joystick joystick, Animator animator, AudioSource audioSource, AudioClip[] audioClip) : base(fsm,transform,speed,rb,colliderCharacter)
+    public AndroidPlayerMovement(Fsm fsm, Character Character, Joystick joystick, Animator animator, AudioSource audioSource, AudioClip[] audioClip) : base(fsm, Character)
     {
-        transformCharacter = transform;
-        this.rb = rb;
-        this.colliderCharacter = colliderCharacter;
-        this.speed = speed;
+        transformCharacter = Character.transform;
+        rb = Character.rb;
+        colliderCharacter = Character.colliderCharacter;
+        speed = Character.speed;
         this.joystick = joystick;
         this.animator = animator;
         this.audioSource = audioSource;

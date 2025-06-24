@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,13 +10,11 @@ public class AndroidPlayerRun : AndroidPlayerMovement
     private ButtonUi buttonUi;
     private ButtonPanel[] buttonPanel;
     private bool canSound = true;
-
     private enum Button
     {
-        Slide,
-        BoostSpeed
+        Slide
     }
-    public AndroidPlayerRun(Fsm fsm, Transform transform, float speed, Rigidbody rb, CapsuleCollider colliderCharacter, Joystick joystic,ButtonUi buttonUi,ButtonPanel[] buttonPanel, Animator animator, AudioSource audioSourc, AudioClip[] audioClip) : base(fsm, transform, speed, rb, colliderCharacter, joystic,animator,audioSourc,audioClip)
+    public AndroidPlayerRun(Fsm fsm, Character Character, Joystick joystic,ButtonUi buttonUi,ButtonPanel[] buttonPanel, Animator animator, AudioSource audioSourc, AudioClip[] audioClip) : base(fsm, Character, joystic,animator,audioSourc,audioClip)
     {
         this.buttonUi = buttonUi;
         this.buttonPanel = buttonPanel;
@@ -40,17 +38,13 @@ public class AndroidPlayerRun : AndroidPlayerMovement
     {
         Fsm.SetState<AndroidPlayerSlide>();
     }
-    public void ButtonBustSpeed(float speed)
-    {
-        
-    }
     private void StartAnimation()
     {
         animator.SetLayerWeight(1, 0.05f);
     }
     private void Sound()
     {
-        audioSource.pitch = Random.Range(1f, 2f);
+        audioSource.pitch = UnityEngine.Random.Range(1f, 2f);
         audioSource.PlayOneShot(audioClip[0], 1f);
     }
     private async UniTask StartSoundUniTask()
